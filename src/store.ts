@@ -12,6 +12,7 @@ type Action =
       };
 
 export const reducer = (state: State, action: Action) => {
+    console.log(action);
     switch (action.type) {
         case 'START':
             return {

@@ -28,6 +28,10 @@ export const App: FC = memo(() => {
     const assistantRef = useRef<ReturnType<typeof createAssistant>>();
 
     useEffect(() => {
+        console.log('appState111', appState);
+    }, [appState]);
+
+    useEffect(() => {
         assistantRef.current = initializeAssistant(() => assistantStateRef.current);
 
         assistantRef.current.on('data', ({ navigation, action }: any) => {
@@ -51,6 +55,15 @@ export const App: FC = memo(() => {
 
     const action = (text:any) => () => {
         console.log(text);
+    }
+
+    const route = () => {
+        switch (appState.currentTab) {
+            case 0:
+                return <Tab1 dispatch={dispatch} assistant={assistantRef.current} />;
+            case 1:
+                return <Tab2 {...assistantRef.current} dispatch={dispatch} />;
+        }
     }
 
     return (
@@ -90,8 +103,7 @@ export const App: FC = memo(() => {
             <Container>
                 <Row>
                     <Col size={4}>
-                        {appState.currentTab === 0 ? <Tab1 {...assistantRef.current} /> : null}
-                        {appState.currentTab === 1 ? <Tab2 {...assistantRef.current} /> : null}
+                        {route()}
                     </Col>
                 </Row>
             </Container>
