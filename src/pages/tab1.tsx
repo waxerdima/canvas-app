@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button } from '@sberdevices/plasma-ui/components/Button/Button';
 import { Container, Row, Col }  from '@sberdevices/plasma-ui';
+import { sendData } from '../assistant';
 
-export const Tab1 = ({ assistant, dispatch }: any) => {
+export const Tab1 = ({ dispatch }: any) => {
     const click = () => () => {
-        assistant.sendData({ action: { action_id: 'CLICK' } });
+        sendData({ action: { action_id: 'CLICK' } });
     };
 
     const click2 = () => () => {
-        assistant.sendData({ action: { action_id: 'SELECT', parameters: { tab: 1 } } });
+        sendData({ action: { action_id: 'SELECT', parameters: { tab: 1 } } });
     };
 
     const click3 = () => () => {
